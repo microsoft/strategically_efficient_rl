@@ -1,0 +1,22 @@
+stochastic_game_optimistic_ulcb:
+    iterations: 1000
+    eval_interval: 10
+    num_games: 5
+    num_runs: 1
+    # ==== Game ====
+    game: stochastic_game
+    game_config:
+        states: 50
+        bias: 0.5
+        successors: 4
+        depth:
+            grid_search: [6, 8, 10]
+        actions: 
+            grid_search: [4, 8]
+    # ==== Algorithm ====
+    alg: optimistic_ulcb
+    alg_config: 
+        iteration_episodes: 10
+        exploit: True
+        beta:
+            grid_search: [1.0, 5.0, 10.0]

@@ -1,0 +1,23 @@
+decoy_deep_sea_strategic_nash_q_tune:
+    iterations: 500
+    eval_interval: 1
+    num_games: 4
+    num_runs: 1
+    # ==== Game ====
+    game: decoy_deep_sea
+    game_config:
+        decoy_games: 
+            grid_search: [10, 30]
+        decoy_size: 
+            grid_search: [10, 20]
+        decoy_payoff: 1.
+        target_payoff: 1.
+        target_penalty: 0.0
+        adversary_payoff: 0.5
+    # ==== Algorithm ====
+    alg: optimistic_nash_q
+    alg_config: 
+        iteration_episodes: 100
+        beta: 0.0
+        averaging:
+            grid_search: [False, True]

@@ -1,0 +1,26 @@
+stochastic_game_optimistic_q_learning:
+    iterations: 2000
+    eval_interval: 20
+    num_games: 5
+    num_runs: 1
+    # ==== Game ====
+    game: stochastic_game
+    game_config:
+        states: 50
+        bias: 0.5
+        successors: 4
+        depth:
+            grid_search: [6, 8, 10]
+        actions: 
+            grid_search: [4, 8]
+    # ==== Algorithm ====
+    alg: optimistic_q_learning
+    alg_config:
+        iteration_episodes: 10
+        gamma: 1.0
+        epsilon: 0.05
+        exploit: True
+        averaging: False
+        beta:
+            grid_search: [1.0, 5.0, 10.0]
+        

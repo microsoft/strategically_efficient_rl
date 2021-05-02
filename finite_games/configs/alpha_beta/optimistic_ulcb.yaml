@@ -1,0 +1,20 @@
+alpha_beta_optimistic_ulcb:
+    iterations: 1000
+    eval_interval: 10
+    num_games: 10
+    num_runs: 1
+    # ==== Game ====
+    game: alpha_beta
+    game_config:
+        bias: 0.5
+        depth:
+            grid_search: [4, 5, 6]
+        actions: 
+            grid_search: [4, 5, 6]
+    # ==== Algorithm ====
+    alg: optimistic_ulcb
+    alg_config: 
+        iteration_episodes: 10
+        beta: 0.0
+        exploit:
+            grid_search: [False, True]

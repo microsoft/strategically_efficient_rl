@@ -1,0 +1,19 @@
+deep_sea_strategic_nash_q:
+    iterations: 200
+    eval_interval: 1
+    num_games: 5
+    num_runs: 1
+    # ==== Game ====
+    game: deep_sea
+    game_config:
+        penalty: 0.0
+        size:
+            grid_search: [20, 40, 60]
+    # ==== Algorithm ====
+    alg: strategic_nash_q
+    alg_config: 
+        iteration_episodes: 50
+        beta: 
+            grid_search: [0.0, 1.0]
+        initial_value:
+            grid_search: [0.0, 1.0]

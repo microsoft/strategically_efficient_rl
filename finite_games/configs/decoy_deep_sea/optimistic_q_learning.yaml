@@ -1,0 +1,26 @@
+decoy_deep_sea_optimistic_q_learning:
+    iterations: 2000
+    eval_interval: 10
+    num_games: 10
+    num_runs: 1
+    # ==== Game ====
+    game: decoy_deep_sea
+    game_config:
+        decoy_games: 
+            grid_search: [10, 20, 30, 40, 50]
+        decoy_size: 
+            grid_search: [10, 20]
+        decoy_payoff: 1.
+        target_payoff: 1.
+        target_penalty: 0.0
+        adversary_payoff: 0.5
+    # ==== Algorithm ====
+    alg: optimistic_q_learning
+    alg_config: 
+        iteration_episodes: 10
+        gamma: 1.0
+        epsilon: 0.05
+        exploit: True
+        beta: 0.0
+        averaging:
+            grid_search: [False, True]

@@ -1,0 +1,22 @@
+mountain_car_ppo:
+    run: PPO
+    stop:
+        timesteps_total: 100000
+    # checkpoint_freq: 1000
+    checkpoint_at_end: True
+    num_samples: 5
+    config:
+        # === Environment ===
+        horizon: 100
+        env: MountainCar-v0
+        # === PPO ===
+        lambda: 0.95
+        gamma: 0.95
+        entropy_coeff: 0.001
+        clip_param: 0.1
+        lr: 0.001
+        num_sgd_iter: 8
+        sgd_minibatch_size: 128
+        train_batch_size: 400
+        rollout_fragment_length: 100
+        batch_mode: complete_episodes

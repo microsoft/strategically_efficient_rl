@@ -1,0 +1,32 @@
+simple_push_ppo:
+    run: SIMULTANEOUS_PLAY
+    stop:
+        timesteps_total: 2400000
+    checkpoint_freq: 500
+    checkpoint_at_end: True
+    num_samples: 5
+    config:
+        alg: PPO
+        # === Evaluation ===
+        population:
+          - path: populations/simple_push_ppo
+            alg: SIMULTANEOUS_PLAY
+            mapping: [[1, learned_policy_1]]
+        random_eval: True
+        multiagent_eval_interval: 20
+        # === Environment ===
+        horizon: 200
+        env: mpe
+        env_config:
+            scenario_name: simple_push
+            action_space: discrete
+        # === PPO ===
+        lambda: 0.95
+        gamma: 0.95
+        entropy_coeff: 0.001
+        clip_param: 0.1
+        lr: 0.001
+        num_sgd_iter: 8
+        train_batch_size: 1600
+        rollout_fragment_length: 400
+        batch_mode: truncate_episodes

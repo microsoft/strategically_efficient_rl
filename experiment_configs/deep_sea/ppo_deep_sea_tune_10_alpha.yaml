@@ -1,0 +1,34 @@
+deep_sea_ppo_tune_10_alpha:
+    run: PPO
+    stop:
+        timesteps_total: 400000
+    checkpoint_at_end: True
+    num_samples: 3
+    config:
+        # === Environment ===
+        horizon: 30
+        env: openspiel
+        env_config:
+            game: deep_sea
+            size: 10
+        # === PPO ===
+        lambda: 0.95
+        gamma: 0.99
+        entropy_coeff: 0.001
+        clip_param: 0.1
+        lr: 
+            grid_search: 
+                - 0.001
+                - 0.0001
+                - 0.00001
+        num_sgd_iter:
+            grid_search:
+                - 8
+                - 16
+        sgd_minibatch_size:
+            grid_search:
+                - 32
+                - 64
+        train_batch_size: 160
+        rollout_fragment_length: 40
+        batch_mode: complete_episodes

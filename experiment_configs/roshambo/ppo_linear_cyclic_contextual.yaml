@@ -1,0 +1,29 @@
+cyclic_contextual_ppo_linear:
+    run: PPO
+    stop:
+        timesteps_total: 600000
+    checkpoint_at_end: True
+    num_samples: 20
+    config:
+        evaluation_interval: 1
+        # === Environment ===
+        env: roshambo
+        env_config:
+            transitive_actions: 0
+            cyclic_actions: 9
+            num_contexts: 8
+        # === Model ===
+        model:
+            fcnet_hiddens: []
+        # === PPO ===
+        lambda: 0.95
+        gamma: 0.99
+        entropy_coeff: 0.0
+        clip_param: 0.1
+        lr: 0.00001
+        kl_target: 0.01
+        num_sgd_iter: 16
+        sgd_minibatch_size: 32
+        train_batch_size: 160
+        rollout_fragment_length: 40
+        batch_mode: complete_episodes

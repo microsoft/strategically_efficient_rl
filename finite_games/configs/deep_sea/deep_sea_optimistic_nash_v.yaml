@@ -1,0 +1,23 @@
+deep_sea_optimistic_nash_v:
+    iterations: 1000
+    eval_interval: 1
+    num_games: 10
+    num_runs: 1
+    # ==== Game ====
+    game: deep_sea
+    game_config:
+        penalty: 0.0
+        size:
+            grid_search: [20, 40]
+    # ==== Algorithm ====
+    alg: optimistic_nash_v
+    alg_config: 
+        iteration_episodes: 100
+        gamma: 0.5
+        eta: 
+            grid_search: [10.0, 100.0]
+        beta:
+            grid_search: [0.0, 1.0]
+        initial_value:
+            grid_search: [0.0, 1.0]
+        

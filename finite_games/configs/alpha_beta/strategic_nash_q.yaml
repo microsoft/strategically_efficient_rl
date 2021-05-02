@@ -1,0 +1,19 @@
+alpha_beta_strategic_nash_q:
+    iterations: 5000
+    eval_interval: 20
+    num_games: 10
+    num_runs: 1
+    # ==== Game ====
+    game: alpha_beta
+    game_config:
+        bias: 0.5
+        depth:
+            grid_search: [4, 5, 6]
+        actions: 
+            grid_search: [4, 5, 6]
+    # ==== Algorithm ====
+    alg: strategic_nash_q
+    alg_config: 
+        iteration_episodes: 10
+        beta: 0.0
+        averaging: True

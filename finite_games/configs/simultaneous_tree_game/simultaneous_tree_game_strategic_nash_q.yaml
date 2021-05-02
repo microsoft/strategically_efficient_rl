@@ -1,0 +1,19 @@
+simultaneous_tree_game_strategic_nash_q:
+    iterations: 2000
+    eval_interval: 10
+    num_games: 5
+    num_runs: 1
+    # ==== Game ====
+    game: simultaneous_tree_game
+    game_config:
+        bias: 
+            grid_search: [0.5, 0.1]
+        depth:
+            grid_search: [3, 4, 5]
+        actions: 3
+    # ==== Algorithm ====
+    alg: strategic_nash_q
+    alg_config: 
+        solver: interior-point
+        iteration_episodes: 10
+        beta: 1.0

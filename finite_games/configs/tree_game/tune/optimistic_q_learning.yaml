@@ -1,0 +1,26 @@
+tree_game_optimistic_q_learning_tune:
+    iterations: 500
+    eval_interval: 1
+    num_games: 4
+    num_runs: 1
+    # ==== Game ====
+    game: tree_game
+    game_config:
+        bias: 0.5
+        depth:
+            grid_search: [4, 5, 6]
+        actions: 
+            grid_search: [4, 5, 6]
+    # ==== Algorithm ====
+    alg: optimistic_q_learning
+    alg_config: 
+        iteration_episodes: 100
+        gamma: 1.0
+        epsilon: 
+            grid_search: [0.0, 0.05]
+        beta: 
+            grid_search: [0.0, 1.0]
+        exploit:
+            grid_search: [False, True]
+        averaging:
+            grid_search: [False, True]

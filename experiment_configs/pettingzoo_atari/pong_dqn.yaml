@@ -1,0 +1,43 @@
+pong_dqn:
+    run: DQN
+    stop:
+        timesteps_total: 10000000
+    checkpoint_freq: 200
+    checkpoint_at_end: True
+    num_samples: 4
+    config:
+        # === Environment ===
+        env: pettingzoo_atari
+        env_config:
+            game: pong_v1
+        # === DQN ===
+        gamma: 0.99
+        num_atoms: 1
+        v_min: -100.0
+        v_max: 100.0
+        dueling: True
+        double_q: True
+        n_step: 3
+        exploration_config:
+            initial_epsilon: 1.0
+            final_epsilon: 0.02
+            epsilon_timesteps: 500000
+        timesteps_per_iteration: 10000
+        target_network_update_freq: 3200
+        buffer_size: 50000
+        prioritized_replay: True
+        prioritized_replay_alpha: 0.6
+        prioritized_replay_beta: 0.4
+        final_prioritized_replay_beta: 0.4
+        prioritized_replay_beta_annealing_timesteps: 500000
+        prioritized_replay_eps: 0.000001
+        compress_observations: False
+        lr: 0.0005
+        grad_norm_clipping: 40
+        learning_starts: 10000
+        rollout_fragment_length: 16
+        train_batch_size: 64
+        num_envs_per_worker: 4
+        batch_mode: truncate_episodes
+        observation_filter: NoFilter
+        num_gpus: 1

@@ -1,0 +1,39 @@
+transitive_contextual_ppo_tune:
+    run: PPO
+    stop:
+        timesteps_total: 100000
+    checkpoint_at_end: True
+    num_samples: 2
+    config:
+        evaluation_interval: 1
+        # === Environment ===
+        env: roshambo
+        env_config:
+            transitive_actions: 10
+            cyclic_actions: 0
+            num_contexts: 8
+            eval_steps: 100
+        # === PPO ===
+        lambda: 0.95
+        gamma: 0.99
+        entropy_coeff: 
+            grid_search:
+                - 0.0
+                - 0.001
+        clip_param: 
+            grid_search:
+                - 0.1
+                - 0.5
+        lr: 
+            grid_search:
+                - 0.0001
+                - 0.00001
+        kl_target: 
+            grid_search:
+                - 0.01
+                - 0.1
+        num_sgd_iter: 16
+        sgd_minibatch_size: 32
+        train_batch_size: 160
+        rollout_fragment_length: 40
+        batch_mode: complete_episodes

@@ -1,0 +1,24 @@
+deep_sea_optimistic_q_learning_tune:
+    iterations: 500
+    eval_interval: 1
+    num_games: 5
+    num_runs: 1
+    # ==== Game ====
+    game: deep_sea
+    game_config:
+        size:
+            grid_search: [10, 20, 40]
+        penalty: 
+            grid_search: [0.0, 0.01]
+    # ==== Algorithm ====
+    alg: optimistic_q_learning
+    alg_config:
+        iteration_episodes: 100
+        gamma: 1.0
+        learning_rate: 1.0
+        epsilon:
+            grid_search: [0.0, 0.05]
+        beta: 
+            grid_search: [0.0, 1.0, 10.0]
+        greedy: 
+            grid_search: [False, True]

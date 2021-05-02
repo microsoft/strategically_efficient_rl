@@ -1,0 +1,23 @@
+mountain_car_deep_nash:
+    run: DEEP_NASH_V1
+    stop:
+        timesteps_total: 100000
+    # checkpoint_freq: 1000
+    checkpoint_at_end: True
+    num_samples: 5
+    config:
+        # === Environment ===
+        horizon: 100
+        env: MountainCar-v0
+        # === Deep Nash ===
+        buffer_size: 10000
+        batch_size: 128
+        sampling_ratio: 10
+        learning_rate: 0.001
+        hidden_sizes: [64, 64]
+        activation: tanh
+        gamma: 0.95
+        beta: 1.0
+        implicit_exploration: 0.05
+        share_layers: True
+        rollout_fragment_length: 100

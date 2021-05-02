@@ -1,0 +1,45 @@
+blade_one_on_one_ppo_self_play:
+  run: SELF_PLAY
+  stop:
+    self_play_rounds: 30
+  checkpoint_freq: 500
+  checkpoint_at_end: True
+  num_samples: 5
+  config:
+    alg: PPO
+    # === Evaluation ===
+    population:
+      - path: populations/blade_one_on_one_ppo
+        alg: SIMULTANEOUS_PLAY
+        mapping: [[1, learned_policy_1]]
+    random_eval: True
+    multiagent_eval_interval: 20
+    # === Self Play ===
+    symmetric: False
+    self_play_round_stop: 
+      training_iteration: 50
+    self_play_pretrain_stop:
+      training_iteration: 0
+    # === Environment ===
+    horizon: 256
+    env: mpe
+    env_config:
+      scenario_name: blade_one_on_one
+      action_space: discrete
+      config:
+        max_episode_length: 256
+        max_score: 256
+        dense_reward: True
+        damage: True
+        respawn_time: 10
+        capture_time: 5
+    # === PPO ===
+    lambda: 0.99
+    gamma: 0.99
+    entropy_coeff: 0.001
+    clip_param: 0.1
+    lr: 0.001
+    num_sgd_iter: 8
+    train_batch_size: 2048
+    rollout_fragment_length: 256
+    batch_mode: truncate_episodes

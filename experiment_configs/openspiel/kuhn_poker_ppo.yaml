@@ -1,0 +1,30 @@
+kuhn_poker_ppo:
+    run: SIMULTANEOUS_PLAY
+    stop:
+        timesteps_total: 500000
+    checkpoint_at_end: True
+    num_samples: 5
+    config:
+        alg: PPO
+        # === Evaluation ===
+        population:
+          - path: populations/kuhn_poker_ppo
+            alg: SIMULTANEOUS_PLAY
+            mapping: [[1, learned_policy_1]]
+        random_eval: True
+        multiagent_eval_interval: 20
+        # === Environment ===
+        horizon: 500
+        env: openspiel
+        env_config:
+            game: kuhn_poker
+        # === PPO ===
+        lambda: 0.95
+        gamma: 0.95
+        entropy_coeff: 0.001
+        clip_param: 0.1
+        lr: 0.001
+        num_sgd_iter: 8
+        train_batch_size: 400
+        rollout_fragment_length: 100
+        batch_mode: truncate_episodes

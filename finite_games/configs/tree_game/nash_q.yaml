@@ -1,0 +1,22 @@
+tree_game_nash_q:
+    iterations: 5000
+    eval_interval: 10
+    num_games: 10
+    num_runs: 1
+    # ==== Game ====
+    game: tree_game
+    game_config:
+        bias: 
+            grid_search: [0.5, 0.1]
+        depth:
+            grid_search: [4, 5, 6]
+        actions: 
+            grid_search: [5, 10]
+    # ==== Algorithm ====
+    alg: nash_q
+    alg_config: 
+        iteration_episodes: 1
+        initial_value:
+            grid_search: [0.0, 1.0]
+        epsilon:
+            grid_search: [0.0, 0.1]

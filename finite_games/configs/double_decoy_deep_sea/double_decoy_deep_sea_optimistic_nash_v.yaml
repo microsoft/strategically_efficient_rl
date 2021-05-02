@@ -1,0 +1,25 @@
+double_decoy_deep_sea_optimistic_nash_v:
+    iterations: 500
+    eval_interval: 1
+    num_games: 10
+    num_runs: 1
+    # ==== Game ====
+    game: double_decoy_deep_sea
+    game_config:
+        decoy_games: 
+            grid_search: [20, 40, 60, 80, 100]
+        decoy_size: 
+            grid_search: [10, 20]
+        decoy_payoff: 1.
+        adversary_size:
+            grid_search: [5, 10, 20]
+        adversary_payoff: 1.0
+        target_payoff: 1.
+        penalty: 0.0
+    # ==== Algorithm ====
+    alg: optimistic_nash_v
+    alg_config: 
+        iteration_episodes: 100
+        gamma: 0.5
+        eta: 100.0
+        beta: 1.0

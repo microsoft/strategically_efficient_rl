@@ -1,0 +1,30 @@
+cart_pole_dqn:
+    run: DQN
+    stop:
+        timesteps_total: 100000
+    # checkpoint_freq: 1000
+    checkpoint_at_end: True
+    num_samples: 5
+    config:
+        # === Environment ===
+        horizon: 100
+        env: CartPole-v1
+        # === DQN ===
+        dueling: True
+        double_q: True
+        n_step: 1
+        timesteps_per_iteration: 1000
+        target_network_update_freq: 500
+        buffer_size: 20000
+        prioritized_replay: True
+        gamma: 0.95
+        lr: 0.001
+        train_batch_size: 32
+        rollout_fragment_length: 4
+        batch_mode: truncate_episodes
+        # === Exploration ===
+        exploration_config: 
+          type: EpsilonGreedy
+          initial_epsilon: 1.0
+          final_epsilon: 0.02
+          epsilon_timesteps: 50000

@@ -1,0 +1,25 @@
+alpha_beta_optimistic_nash_v_tune:
+    iterations: 500
+    eval_interval: 1
+    num_games: 4
+    num_runs: 1
+    # ==== Game ====
+    game: alpha_beta
+    game_config:
+        bias: 0.5
+        depth:
+            grid_search: [4, 5, 6]
+        actions: 
+            grid_search: [4, 5, 6]
+    # ==== Algorithm ====
+    alg: optimistic_nash_v
+    alg_config: 
+        iteration_episodes: 100
+        gamma: 
+            grid_search: [0.1, 0.5]
+        eta:
+            grid_search: [0.1, 0.5, 10.0, 100.0]
+        beta: 
+            grid_search: [0.0, 1.0]
+        averaging:
+            grid_search: [False, True]

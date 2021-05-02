@@ -1,0 +1,20 @@
+decoy_deep_sea_strategic_ulcb:
+    iterations: 2000
+    eval_interval: 10
+    num_games: 5
+    num_runs: 1
+    # ==== Game ====
+    game: decoy_deep_sea
+    game_config:
+        decoy_games: 
+            grid_search: [10, 30, 50]
+        decoy_size: 20
+        decoy_payoff: 1.
+        target_payoff: 1.
+        target_penalty: 0.0
+        adversary_payoff: 0.5
+    # ==== Algorithm ====
+    alg: strategic_ulcb
+    alg_config: 
+        iteration_episodes: 10
+        beta: 0.0
