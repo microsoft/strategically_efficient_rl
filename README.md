@@ -1,6 +1,65 @@
-# Project
+# Strategically Efficient Exploration in Competitive Multi-agent Reinforcement Learning
 
-This repo contains implementations of algorithms for more efficient exploration in multi-agent reinforcement learning, as well as scripts for reproducing and analyzing results.  The **finite_games** directory contains algorithms specific to finite games with enumerable state and action spaces.  
+This repository contains all code and hyperparameter configurations needed to replicate the results in [Strategically Efficient Exploration in Competitive Multi-agent Reinforcement Learning (UAI 2021)](https://arxiv.org/pdf/2107.14698.pdf)
+
+In addition to finite Markov games, this project also supports experiments with curiosity in deep multi-agent reinforcement learning.
+
+## Getting Started
+
+This code has only been tested with Python 3.7.11 on Ubuntu 18.04 and 20.04 in the Windows Subsystem for Linux (WSL).
+
+Dependencies an be installed via PIP:
+
+```
+pip install -r requirements.txt
+```
+
+This will install all the dependencies needed to reproduce published results.  Some deep RL experiment configurations us environments implemented in the [OpenSpiel](https://github.com/deepmind/open_spiel) or [PettingZoo](https://github.com/PettingZoo-Team/PettingZoo) projects, which must be installed separately.  Please refer to these projects for complete installation instructions.
+
+## Reproducing UAI Results
+
+Results in Figures 3 and 4 can be generated using the script "finite_games/learn_extensive_form.py" to run the appropriate training configurations:
+
+```
+cd finite_games
+python learn_extensive_form.py \
+    -f configs/decoy_deep_sea/strategic_ulcb.yaml \
+    -f configs/decoy_deep_sea/optimistic_ulcb.yaml \
+    -f configs/decoy_deep_sea/strategic_nash_q.yaml \
+    -f configs/decoy_deep_sea/optimistic_nash_q.yaml
+```
+
+Experiment configurations can be run separately if preferred.  Results for Figure 5 can be generated using:
+
+```
+python learn_extensive_form.py \
+    -f configs/alpha_beta/strategic_ulcb.yaml \
+    -f configs/alpha_beta/optimistic_ulcb.yaml \
+    -f configs/alpha_beta/strategic_nash_q.yaml \
+    -f configs/alpha_beta/optimistic_nash_q.yaml
+```
+
+Figures can be generated using the "finite_games/plot_runs.py" script.  Note that this script requires
+
+Example:
+
+```
+python plot_runs.py \
+    "Strategic ULCB" results/debug/decoy_deep_sea_strategic_ulcb/decoy_deep_sea_strategic_ulcb_decoy_games=50,decoy_size=20 \
+    "Optimistic ULCB" results/debug/decoy_deep_sea_optimistic_ulcb/decoy_deep_sea_optimistic_ulcb_decoy_games=50,decoy_size=20,exploit=True
+```
+
+## Deep RL Experiments
+
+Deep RL experiments use [RLLib](https://github.com/ray-project/ray/tree/master/rllib) 0.8.3 and [Tensorflow](https://www.tensorflow.org/) 2.4.2, both installed by "requirements.txt".  Experiments with deep multi-agent RL can be run with the "train_multiagent.py" script.
+
+Example:
+
+```
+python3 train_multiagent.py -f experiment_configs/roshambo/ppo_hybrid_bandit.yaml --nash-conv
+```
+
+This will train [PPO](https://arxiv.org/abs/1707.06347) in self-play in a simple two-player matrix game.  This project currently supports two intrinsic reward mechansims with multi-agent PPO, [Random Network Distillation](https://arxiv.org/pdf/1810.12894.pdf) and the [Intrinsic Curiosity Module](https://arxiv.org/abs/1705.05363). 
 
 ## Contributing
 
