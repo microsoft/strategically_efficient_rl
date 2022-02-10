@@ -11,4 +11,4 @@ requests==2.22.0
 setproctitle==1.1.10
 setuptools==41.0.0
 tabulate==0.8.6
-tensorflow==2.4.2
+tensorflow==2.5.3
